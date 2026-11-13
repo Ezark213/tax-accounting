@@ -1,22 +1,35 @@
 # tax-accounting
 
-税務・会計業務（顧問先の申告書レビュー、決算チェック）で再利用する手順・チェックリスト・教訓を置く場所。
-クライアント固有の事実は書かない（それはメモリ `~/.claude/projects/C--claude/memory/` に置く）。ここには**会社が変わっても使える一般則**だけを蓄積する。
+税務・会計業務（帳簿レビュー、決算チェック、申告書レビュー、消費税・償却資産の書類作成）で再利用する手順・チェックリスト・教訓を置く場所。
+会社が変わっても使える一般則だけを書く。顧問先固有の事実は書かない（それはメモリ `~/.claude/projects/C--claude/memory/` に置く）。
+
+## どれを使うか
+
+作業の順番は、帳簿レビュー → 申告書レビュー。
+
+| 場面 | 読むファイル |
+|---|---|
+| 決算前の帳簿チェック（残高・タグ・重複・税区分・証憑突合） | [freee-closing-check-rules.md](freee-closing-check-rules.md)、論点別の観点は [bookkeeping-review-checklist.md](bookkeeping-review-checklist.md) |
+| 月次チェック（13観点） | [freee-monthly-check-rules.md](freee-monthly-check-rules.md)（手順は skill `freee-monthly-check`） |
+| 申告書レビュー（法人税・消費税・地方税） | [corporate-tax-return-review-checklist.md](corporate-tax-return-review-checklist.md) |
+| 消費税計算書類（区分別表）の作成 | [consumption-tax-calc-sheet.md](consumption-tax-calc-sheet.md) |
+| 固定資産台帳・償却資産申告（freee） | [freee-fixed-asset-depreciable-tax.md](freee-fixed-asset-depreciable-tax.md) |
 
 ## ファイル一覧
 
-| ファイル | 内容 | 初版 |
+| ファイル | 中身 | 初版 |
 |---|---|---|
-| [bookkeeping-review-checklist.md](bookkeeping-review-checklist.md) | 帳簿（freee）レビュー 期中・決算前のチェックリスト（データ取得、前期決算整理仕訳の二重計上、取引先別残高、桁違いの取引、売上・在庫、給与・源泉、消費税の納税義務と期中登録、関係会社、債務超過、報告書の作り方） | 2026-10-18 |
-| [corporate-tax-return-review-checklist.md](corporate-tax-return-review-checklist.md) | 法人税・消費税・地方税 申告書レビューのチェックリスト（登記簿突合、別表、消費税の不動産論点、地方税、概況書、内訳書、国際関連、検算式、レビュー運用の教訓） | 2026-09-23 |
-| [freee-closing-check-rules.md](freee-closing-check-rules.md) | freee決算前チェックのルール（不明点リストの型分類、仕訳帳での機械チェックA〜H、取引先別残高・月ごとのタグ不一致・重複・税区分、誤検知の除外、証憑突合の4区分、HTML成果物の型） | 2026-10-14 |
-| [nozei-kakuninsho/](nozei-kakuninsho/README.md) | 納付税額確認書（納付税額一覧表）のPDF生成スクリプトと、申告書から拾う数字・翌期予定納付額の計算ルール | 2026-10-21 |
-| [freee-monthly-check-rules.md](freee-monthly-check-rules.md) | freee月次チェック13観点の定義（判定5区分、観点ごとの基準と確度、対応文、未確定部分の育て方）。手順は skill `freee-monthly-check` | 2026-11-10 |
-| [consumption-tax-calc-sheet.md](consumption-tax-calc-sheet.md) | 消費税計算書類（区分別表）の作り方と使い方（PL・BSと消費税の関係を見る表としての役割、シート構成、仕訳帳からの集計、貸方はマイナス・実額を入れる欄、資産の取得、納付税額とBS未払消費税等の検算、更新手順） | 2026-11-13 |
+| [bookkeeping-review-checklist.md](bookkeeping-review-checklist.md) | 帳簿（freee）レビューの論点別チェックリスト（前期決算整理仕訳の二重計上、桁違い、給与・源泉、消費税の納税義務、関係会社、債務超過） | 2026-10-18 |
+| [corporate-tax-return-review-checklist.md](corporate-tax-return-review-checklist.md) | 法人税・消費税・地方税の申告書レビュー（登記簿突合、別表、地方税、概況書、内訳書、検算式） | 2026-09-23 |
+| [freee-closing-check-rules.md](freee-closing-check-rules.md) | freee決算前チェック（機械チェックA〜H、誤検知の除外、証憑突合、HTML成果物の型） | 2026-10-14 |
+| [freee-monthly-check-rules.md](freee-monthly-check-rules.md) | freee月次チェック13観点の定義（判定5区分、基準、対応文） | 2026-11-10 |
+| [freee-fixed-asset-depreciable-tax.md](freee-fixed-asset-depreciable-tax.md) | freee固定資産台帳と償却資産申告（過年度少額資産のAPI登録、償却方法コード、提出先、前回申告書との突合） | 2026-11-13 |
+| [consumption-tax-calc-sheet.md](consumption-tax-calc-sheet.md) | 消費税計算書類（区分別表）の作り方と使い方（シート構成、検算、更新手順） | 2026-11-13 |
 
-## 運用ルール
+## 更新ルール
 
-- 申告書レビュー・帳簿レビューを行ったら、新しく見つけた落とし穴・法令根拠を該当するチェックリストに追記する（事例名は付録に1行）。順番は帳簿レビュー → 申告書レビュー。
-- 条文・区分番号・期間は一次情報で確認してから書く。記憶ベースの追記は禁止。
-- 追記したら独立レビュー（別エージェント）で根拠を照合してからコミットする。
-- 大きなテーマ（例: 相続・組織再編・国際税務）が増えたら別ファイルに分け、この表に追加する。
+- チェック・レビューのたびに、新しく見つけた一般則を該当ファイルに追記する。ユーザー指示がなくても自動で行う。
+- 顧問先名・個人名・取引先名・固有金額は書かない。事例は付録に匿名で1行だけ。
+- 条文・項番号は一次情報（e-Gov・国税庁）で確認してから書く。記憶では書かない。
+- 追記したら別エージェントで根拠を照合してからコミットする。
+- 大きなテーマ（相続・組織再編・国際税務など）が増えたら別ファイルに分け、上の表に追加する。
